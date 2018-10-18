@@ -1,15 +1,14 @@
 const express = require('express');
 const app = express();
+const timestampService = require('./timestampMicroservice');
 
 app.use(express.static('public'));
 
-app.use('/', (req, res) => {
+app.get('/', (req, res) => {
     res.sendFile(__dirname + "/views/index.html");
 });
 
 app.get('/api/timestamp/:date_string', (req, res) => {
-
-    const timestampService = require('./timestampMicroservice');
 
     const timestamp = timestampService.getTimestamp(req.params.date_string);
 
